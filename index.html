@@ -21,7 +21,12 @@
 
     <script>
       (function() {
-        var backpack = new svgAnimation();
+        var backpack = new svgAnimation(
+          {
+            canvas: Snap("#canvas"),
+            svg:    'svg/backpack.svg'
+          }
+        );
       })();
     </script>
   </body>
