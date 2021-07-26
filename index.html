@@ -11,6 +11,9 @@
     <!-- Libraries -->
     <script src="js/libs/snap.svg.min.js"></script>
     <script src="js/libs/snap.svg.easing.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/src/svgAnimation.js"></script>
   </head>
 
   <body>
@@ -18,11 +21,7 @@
 
     <script>
       (function() {
-        var s = Snap('#canvas');
-
-        Snap.load("svg/backpack.svg", function (data) {
-          s.append(data);
-        });
+        var backpack = new svgAnimation();
       })();
     </script>
   </body>
