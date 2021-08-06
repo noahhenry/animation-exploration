@@ -37,10 +37,94 @@
       @param {String}   svg
     */
     loadSVG: function(canvas, svg) {
+      var self = this;
+
       Snap.load(svg, function(data) {
+        // Place SVG nodes into DOM tree
         canvas.append(data);
+
+        // Zipper animation
+        var $zipper = canvas.select("#zipper");
+        self.createTransformGroup($zipper);
+
+        // Scale Tween
+        var $scaleElement = $zipper.select('.scale');
+        var scaleBBox = $scaleElement.getBBox();
+
+        $scaleElement.transform('S' + 0 + ' ' + 0 + ' ' + self.getOriginX(scaleBBox, 'center') + ' ' + self.getOriginY(scaleBBox, 'top'));
+        $scaleElement.animate({transform: 'S' + 1 + ' ' + 1 + ' ' + self.getOriginX(scaleBBox, 'center') + ' ' + self.getOriginY(scaleBBox, 'top')}, 400, mina['easeOutBack']);
+
+        // Rotate Tween
+        var $rotateElement = $zipper.select('.rotate');
+        var rotateBBox = $rotateElement.getBBox();
+        $rotateElement.transform('R' + 45 + ' ' + self.getOriginX(rotateBBox, 'center') + ' ' + self.getOriginY(rotateBBox, 'top'));
+        
+        $rotateElement.animate({ transform: 'R' + -45 + ' ' + self.getOriginX(rotateBBox, 'center') + ' ' + self.getOriginY(rotateBBox, 'top')}, 400, mina['easeOutBack'], function() {
+          $rotateElement.animate({ transform: 'R' + 30 + ' ' + self.getOriginX(rotateBBox, 'center') + ' ' + self.getOriginY(rotateBBox, 'top')}, 400, mina['easeOutBack'], function() {
+            $rotateElement.animate({ transform: 'R' + 0 + ' ' + self.getOriginX(rotateBBox, 'center') + ' ' + self.getOriginY(rotateBBox, 'top')}, 400, mina['easeInOutBack']);
+          });
+        });
+
+        // Translate Tween
+        var $translateElement = $zipper.select('.translate');
+        $translateElement.transform('T' + 90 + ' ' + 0);
+
+        setTimeout(function() {
+          $translateElement.animate({ transform: 'T' + 0 + ' ' + 0 }, 600, mina['easeOutQuint']);
+        }, 400);
       });
-    }
+    },
+
+    /*
+      Create scale, rotate and transform groups around an SVG DOM node
+      @param {Object} Snap element
+    */
+    createTransformGroup: function(element) {
+      if (element.node) {
+        var childNodes = element.selectAll('*');
+
+        element.g().attr('class', 'translate')
+          .g().attr('class', 'rotate')
+          .g().attr('class', 'scale')
+          .append(childNodes);
+      }
+    },
+
+    /*
+      Translates the horizontal origin from a string to a pixel value
+      @param {Object}     Snap bBox
+      @param {String}     "left", "right", "center"
+      @return {Object}    pixel value
+    */
+    getOriginX: function(bBox, direction) {
+      if (direction === 'left') {
+        return bBox.x;
+      }
+      else if (direction === 'center') {
+        return bBox.cx;
+      }
+      else if (direction === 'right') {
+        return bBox.x2;
+      }
+    },
+
+    /*
+      Translates the vertical origin from a string to a pixel value
+      @param {Object}     Snap bBox
+      @param {String}     "top", "bottom", "center"
+      @return {Object}    pixel value
+    */
+      getOriginY: function(bBox, direction) {
+        if (direction === 'top') {
+          return bBox.y;
+        }
+        else if (direction === 'center') {
+          return bBox.cy;
+        }
+        else if (direction === 'bottom') {
+          return bBox.y2;
+        }
+      },
   };
 
   /*
