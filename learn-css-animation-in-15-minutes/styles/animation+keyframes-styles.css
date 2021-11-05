@@ -1,0 +1,18 @@
+.parent-2 {
+  background-color: darksalmon;
+  height: 400px;
+  width: 400px; }
+
+.parent-2 .child-2 {
+  background-color: darkorchid;
+  height: 50%;
+  width: 50%; }
+
+.parent-2:hover .child-2 {
+  animation: left-to-right 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) infinite; }
+
+@keyframes left-to-right {
+  0% { }
+  50% {
+    transform: translateX(100%); }
+  100% { } }
