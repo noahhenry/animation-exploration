@@ -1,0 +1,25 @@
+{
+  "name": "learn-css-animation-in-15-minutes",
+  "version": "1.0.0",
+  "description": "Working through Web Dev Simplified's Learn CSS Animation In 15 Minutes tutorial.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noahhenry/animation-exploration.git"
+  },
+  "keywords": [
+    "Animation",
+    "CSS",
+    "Javascript",
+    "Web-Animation"
+  ],
+  "author": "Noah E. Henry",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/noahhenry/animation-exploration/issues"
+  },
+  "homepage": "https://github.com/noahhenry/animation-exploration#readme"
+}
