@@ -11,6 +11,9 @@
 .parent-2:hover .child-2 {
   animation: left-to-right 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) infinite; }
 
+.parent-2 .animated {
+  animation: left-to-right 2s cubic-bezier(0.6, -0.28, 0.735, 0.045); }
+
 @keyframes left-to-right {
   0% { }
   50% {
